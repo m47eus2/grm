@@ -5,6 +5,7 @@ app = typer.Typer()
 
 @app.command()
 def create():
+    """[blue]Create[/blue] a new git repository."""
     try:
         subprocess.run(["git", "init"], check=True)
         subprocess.run(["git", "branch", "-m", "main"], check=True)
@@ -13,10 +14,12 @@ def create():
 
 @app.command()
 def clone(repoUrl: str):
+    """[blue]Clone[/blue] a git repository."""
     subprocess.run(["git", "clone", repoUrl])
 
 @app.command()
 def status(verbose: bool = False):
+    """Show [blue]status[/blue] of the git repository."""
     if verbose:
         subprocess.run(["git", "status"])
     else:
@@ -24,6 +27,7 @@ def status(verbose: bool = False):
 
 @app.command()
 def stage(fileName: str = "", all: bool = False):
+    """[blue]Stage[/blue] specified file."""
     if all:
         subprocess.run(["git", "add", "."])
     else:
@@ -31,6 +35,7 @@ def stage(fileName: str = "", all: bool = False):
 
 @app.command()
 def commit(title: str, desc: str = ""):
+    """[blue]Commit[/blue] staged changes."""
     if len(desc) > 0:
         subprocess.run(["git", "commit", "-m", title, "-m", desc])
     else:
@@ -38,6 +43,7 @@ def commit(title: str, desc: str = ""):
 
 @app.command()
 def history(verbose: bool = False):
+    """Shows commits [blue]history[/blue]"""
     if verbose:
         subprocess.run(["git", "log", "--graph"])
     else:
